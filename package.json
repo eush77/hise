@@ -1,12 +1,11 @@
 {
-  "name": "word-highlight",
+  "name": "hise",
   "version": "0.0.0",
   "description": "Highlight words on a page by selecting them with mouse",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
   "bin": {
-    "wordhi": "cli.js",
-    "word-highlight": "cli.js"
+    "hise": "cli.js"
   },
   "scripts": {
     "test": "tape test/*.js"
