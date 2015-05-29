@@ -1,37 +1,31 @@
 {
-  "name": "hise",
+  "name": "highlight-selection",
   "version": "0.0.0",
-  "description": "Highlight words on a page by selecting them with mouse",
+  "description": "Search and highlight selected text on the HTML page",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
   "bin": {
     "hise": "cli.js"
   },
-  "scripts": {
-    "test": "tape test/*.js"
-  },
   "files": [
     "index.js",
     "cli.js"
   ],
-  "homepage": "https://github.com/eush77/word-highlight",
+  "homepage": "https://github.com/eush77/highlight-selection",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eush77/word-highlight"
+    "url": "https://github.com/eush77/highlight-selection"
   },
   "bugs": {
-    "url": "https://github.com/eush77/word-highlight/issues"
+    "url": "https://github.com/eush77/highlight-selection/issues"
   },
   "keywords": [
-    "word",
-    "highlight",
+    "html",
     "selection",
-    "range",
-    "xpath",
+    "search",
+    "highlight",
     "textContent",
-    "node",
-    "occurences",
-    "match"
+    "text"
   ],
   "dependencies": {},
   "devDependencies": {}

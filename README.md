@@ -1,30 +1,34 @@
-[![npm](https://nodei.co/npm/word-highlight.png)](https://nodei.co/npm/word-highlight/)
+[![npm](https://nodei.co/npm/highlight-selection.png)](https://nodei.co/npm/highlight-selection/)
 
-# word-highlight
+# highlight-selection
 
 [![Build Status][travis-badge]][travis] [![Dependency Status][david-badge]][david]
 
-Highlight all occurences of a word on a page by mouse-selecting it.
+Highlight selected text on the rest of HTML page.
 
-[travis]: https://travis-ci.org/eush77/word-highlight
-[travis-badge]: https://travis-ci.org/eush77/word-highlight.svg
-[david]: https://david-dm.org/eush77/word-highlight
-[david-badge]: https://david-dm.org/eush77/word-highlight.png
+[travis]: https://travis-ci.org/eush77/highlight-selection
+[travis-badge]: https://travis-ci.org/eush77/highlight-selection.svg
+[david]: https://david-dm.org/eush77/highlight-selection
+[david-badge]: https://david-dm.org/eush77/highlight-selection.png
 
-## Limitations
+## API
 
-Unfortunately, this script is not capable of matching text that crosses text nodes boundaries.
+### `highlightSelection()`
+
+Sets up event handlers.
 
 ## CLI
 
-```
-wordhi <HTML
-```
+### `hise`
+
+Appends the script to the HTML page.
+
+Reads stdin, writes to stdout.
 
 ## Install
 
 ```
-npm install [-g] word-highlight
+npm install [-g] highlight-selection
 ```
 
 ## License
