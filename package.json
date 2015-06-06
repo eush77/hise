@@ -1,6 +1,6 @@
 {
   "name": "hise",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Expand DOM selection on mouse-up, as a CLI tool",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
