@@ -30,6 +30,7 @@
   "dependencies": {
     "browserify": "^10.2.1",
     "expand-selection": "^0.1.0",
+    "help-version": "^0.2.0",
     "stread": "^0.1.1"
   },
   "devDependencies": {}

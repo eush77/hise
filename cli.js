@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 'use strict';
 
-var browserify = require('browserify'),
+var help = require('help-version')(usage()).help,
+    browserify = require('browserify'),
     stread = require('stread');
 
 
-if (process.argv.slice(2) == '--help') {
-  console.log(['Usage:  hise',
-               '',
-               'Reads stdin, writes to stdout.'].join('\n'));
-  process.exit();
+function usage() {
+  return [
+    'Usage:  hise',
+    '',
+    'Reads stdin, writes to stdout.'
+  ];
 }
 
 
