@@ -3,4 +3,8 @@
 var expandSelection = require('expand-selection');
 
 
-document.addEventListener('mouseup', function () { expandSelection() });
+module.exports = function (opts) {
+  document.addEventListener('mouseup', function () {
+    expandSelection(opts);
+  });
+};

@@ -25,11 +25,15 @@ $ marked README.md |hise |bcat
 
 ## CLI
 
-### `hise [<file>]`
+### `hise [option]... [<file>]`
 
 Appends the script to the HTML page.
 
 Reads `<file>` or stdin, writes to stdout.
+
+#### Option: `--ignore-case, -i`
+
+Ignore case while attempting a match in a string.
 
 ## Install
 
