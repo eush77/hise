@@ -25,11 +25,11 @@ $ marked README.md |hise |bcat
 
 ## CLI
 
-### `hise`
+### `hise [<file>]`
 
 Appends the script to the HTML page.
 
-Reads stdin, writes to stdout.
+Reads `<file>` or stdin, writes to stdout.
 
 ## Install
 

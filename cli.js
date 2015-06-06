@@ -5,13 +5,15 @@ var help = require('help-version')(usage()).help,
     browserify = require('browserify'),
     stread = require('stread');
 
+var fs = require('fs');
+
 
 function usage() {
   return [
-    'Usage:  hise',
+    'Usage:  hise [<file>]',
     '',
-    'Reads stdin, writes to stdout.'
-  ];
+    'Reads <file> or stdin, writes to stdout.'
+  ].join('\n');
 }
 
 
@@ -21,13 +23,23 @@ var bundle = function (cb) {
 };
 
 
-process.stdin.pipe(process.stdout);
+(function (argv) {
+  if (argv.length > 1) {
+    return help(1);
+  }
 
-process.stdin.on('end', function () {
-  process.stdout.write('<script>');
-  bundle(function (err, buf) {
-    if (err) throw err;
-    process.stdout.write(buf.toString());
-    process.stdout.write('</script>');
+  var input = (argv.length == 1)
+        ? fs.createReadStream(argv[0])
+        : process.stdin;
+
+  input.pipe(process.stdout);
+
+  input.on('end', function () {
+    process.stdout.write('<script>');
+    bundle(function (err, buf) {
+      if (err) throw err;
+      process.stdout.write(buf.toString());
+      process.stdout.write('</script>');
+    });
   });
-});
+}(process.argv.slice(2)));
