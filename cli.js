@@ -14,7 +14,7 @@ if (process.argv.slice(2) == '--help') {
 
 
 var bundle = function (cb) {
-  browserify(stread('require("./")()'), { basedir: __dirname })
+  browserify(stread('require("./")'), { basedir: __dirname })
     .bundle(cb);
 };
 
