@@ -35,7 +35,7 @@
     "expand-selection": "^0.2.0",
     "help-version": "^0.2.0",
     "minimist": "^1.1.1",
-    "stread": "^0.1.1"
+    "stread": "^1.0.0"
   },
   "devDependencies": {}
 }
