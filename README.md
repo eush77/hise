@@ -1,21 +1,27 @@
-[![npm](https://nodei.co/npm/highlight-selection.png)](https://nodei.co/npm/highlight-selection/)
+[![npm](https://nodei.co/npm/hise.png)](https://nodei.co/npm/hise/)
 
-# highlight-selection
+# hise
 
-[![Build Status][travis-badge]][travis] [![Dependency Status][david-badge]][david]
+[![Dependency Status][david-badge]][david]
 
-Highlight selected text on the rest of HTML page.
+[Expand DOM selection][expand-selection] on mouse-up, as a CLI tool.
 
-[travis]: https://travis-ci.org/eush77/highlight-selection
-[travis-badge]: https://travis-ci.org/eush77/highlight-selection.svg
-[david]: https://david-dm.org/eush77/highlight-selection
-[david-badge]: https://david-dm.org/eush77/highlight-selection.png
+[expand-selection]: https://github.com/eush77/expand-selection
 
-## API
+This tool can be plugged into other html-producing utilities, adding simple yet useful feature of highlighting all occurences of some piece of text by selecting that piece of text.
 
-### `highlightSelection()`
+[david]: https://david-dm.org/eush77/hise
+[david-badge]: https://david-dm.org/eush77/hise.png
 
-Sets up event handlers.
+## Example
+
+```
+# with source-highlight
+$ source-highlight -i index.js |hise |bcat
+
+# with marked
+$ marked README.md |hise |bcat
+```
 
 ## CLI
 
@@ -28,7 +34,7 @@ Reads stdin, writes to stdout.
 ## Install
 
 ```
-npm install [-g] highlight-selection
+npm install -g hise
 ```
 
 ## License

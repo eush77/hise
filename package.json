@@ -1,9 +1,10 @@
 {
-  "name": "highlight-selection",
+  "name": "hise",
   "version": "0.0.0",
-  "description": "Search and highlight selected text on the HTML page",
+  "description": "Expand DOM selection on mouse-up, as a CLI tool",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
+  "preferGlobal": true,
   "bin": {
     "hise": "cli.js"
   },
@@ -11,20 +12,22 @@
     "index.js",
     "cli.js"
   ],
-  "homepage": "https://github.com/eush77/highlight-selection",
+  "homepage": "https://github.com/eush77/hise",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eush77/highlight-selection"
+    "url": "https://github.com/eush77/hise"
   },
   "bugs": {
-    "url": "https://github.com/eush77/highlight-selection/issues"
+    "url": "https://github.com/eush77/hise/issues"
   },
   "keywords": [
     "html",
+    "transform",
+    "dom",
     "selection",
     "search",
     "highlight",
-    "textContent",
+    "expand",
     "text"
   ],
   "dependencies": {
