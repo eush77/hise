@@ -8,7 +8,7 @@
 
 [expand-selection]: https://github.com/eush77/expand-selection
 
-This tool can be plugged into other html-producing utilities, adding simple yet useful feature of highlighting all occurences of some piece of text by selecting that piece of text.
+`hise` reads HTML or plaintext from input file and adds a `<script>` tag that, when viewing in a web browser, will add an event listener to highlight matching text on mouse selection.
 
 [david]: https://david-dm.org/eush77/hise
 [david-badge]: https://david-dm.org/eush77/hise.png
@@ -16,12 +16,19 @@ This tool can be plugged into other html-producing utilities, adding simple yet 
 ## Example
 
 ```
+# wrap arbitrary output
+$ ps --sort-pcpu | head | hise
+
 # with source-highlight
-$ source-highlight -i index.js |hise |bcat
+$ source-highlight -i index.js | hise
 
 # with marked
-$ marked README.md |hise |bcat
+$ marked README.md | hise
 ```
+
+**Hint**: use [bcat] to pipe HTML output to a browser tab.
+
+[bcat]: https://github.com/rtomayko/bcat
 
 ## CLI
 
