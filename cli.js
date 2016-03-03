@@ -45,6 +45,10 @@ var bundle = function (opts, cb) {
     return help(1);
   }
 
+  // TODO: This is broken in the sense that it doesn't work for HTML anymore.
+  // What a shame.
+  process.stdout.write('<pre>');
+
   var input = (opts._.length == 1)
         ? fs.createReadStream(opts._[0])
         : process.stdin;
@@ -52,7 +56,7 @@ var bundle = function (opts, cb) {
   input.pipe(process.stdout);
 
   input.on('end', function () {
-    process.stdout.write('<script>');
+    process.stdout.write('</pre><script>');
     bundle({ ignoreCase: opts['ignore-case'] }, function (err, buf) {
       if (err) throw err;
       process.stdout.write(buf.toString());
