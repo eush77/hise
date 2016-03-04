@@ -4,7 +4,6 @@
   "description": "Expand DOM selection on mouse-up, as a CLI tool",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
-  "preferGlobal": true,
   "bin": {
     "hise": "cli.js"
   },
