@@ -1,66 +1,42 @@
 #!/usr/bin/env node
 'use strict';
 
-var help = require('help-version')(usage()).help,
-    minimist = require('minimist'),
-    browserify = require('browserify'),
-    stread = require('stread');
+var hise = require('./');
+
+var App = require('help-version'),
+    minimist = require('minimist');
 
 var fs = require('fs');
 
 
-function usage() {
-  return [
-    'Usage:  hise [<file>]',
-    '',
-    'Reads <file> or stdin, writes to stdout.',
-    '',
-    'Options:',
-    '  --ignore-case, -i  Ignore case when performing a match.'
-  ].join('\n');
-}
+var app = App([
+  'Usage:  hise [<file>]',
+  '',
+  'Reads <file> or stdin, writes to stdout.',
+  '',
+  'Options:',
+  '  --ignore-case, -i  Ignore case when performing a match.'
+].join('\n'));
 
-
-var bundle = function (opts, cb) {
-  var init = 'require("./")(' + JSON.stringify(opts) + ')';
-  browserify(stread(init), { basedir: __dirname })
-    .bundle(cb);
-};
-
-
-(function (argv) {
-  var opts = minimist(argv, {
-    boolean: 'ignore-case',
-    alias: {
-      'ignore-case': 'i'
-    },
-    unknown: function (arg) {
-      if (arg[0] == '-') {
-        help(1);
-      }
+var opts = minimist(process.argv.slice(2), {
+  boolean: 'ignore-case',
+  alias: {
+    'ignore-case': 'i'
+  },
+  unknown: function (arg) {
+    if (arg[0] == '-') {
+      app.help(1);
     }
-  });
+  }
+});
 
-  if (opts._.length > 1) {
-    return help(1);
+
+(function main (opts, argv) {
+  if (argv.length > 1) {
+    return app.help(1);
   }
 
-  // TODO: This is broken in the sense that it doesn't work for HTML anymore.
-  // What a shame.
-  process.stdout.write('<pre>');
-
-  var input = (opts._.length == 1)
-        ? fs.createReadStream(opts._[0])
-        : process.stdin;
-
-  input.pipe(process.stdout);
-
-  input.on('end', function () {
-    process.stdout.write('</pre><script>');
-    bundle({ ignoreCase: opts['ignore-case'] }, function (err, buf) {
-      if (err) throw err;
-      process.stdout.write(buf.toString());
-      process.stdout.write('</script>');
-    });
-  });
-}(process.argv.slice(2)));
+  (argv.length == 1 ? fs.createReadStream(argv[0]) : process.stdin)
+    .pipe(hise(opts))
+    .pipe(process.stdout);
+}(opts, opts._));

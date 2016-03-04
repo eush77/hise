@@ -10,7 +10,8 @@
   },
   "files": [
     "index.js",
-    "cli.js"
+    "cli.js",
+    "lib/"
   ],
   "homepage": "https://github.com/eush77/hise",
   "repository": {
@@ -32,10 +33,12 @@
   ],
   "dependencies": {
     "browserify": "^10.2.1",
+    "duplexer2": "^0.1.4",
     "expand-selection": "^0.2.0",
     "help-version": "^0.2.0",
     "minimist": "^1.1.1",
-    "stread": "^1.0.0"
+    "stread": "^1.0.0",
+    "through2": "^2.0.1"
   },
   "devDependencies": {}
 }
