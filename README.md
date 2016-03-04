@@ -2,7 +2,7 @@
 
 # hise
 
-[![Dependency Status][david-badge]][david]
+[![Build Status][travis-badge]][travis] [![Dependency Status][david-badge]][david]
 
 [Expand DOM selection][expand-selection] on mouse-up, as a CLI tool.
 
@@ -10,6 +10,8 @@
 
 `hise` reads HTML or plaintext from input file and adds a `<script>` tag that, when viewing in a web browser, will add an event listener to highlight matching text on mouse selection.
 
+[travis]: https://travis-ci.org/eush77/hise
+[travis-badge]: https://travis-ci.org/eush77/hise.svg?branch=master
 [david]: https://david-dm.org/eush77/hise
 [david-badge]: https://david-dm.org/eush77/hise.png
 

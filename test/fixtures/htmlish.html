@@ -1,0 +1,15 @@
+<!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><font color="#FF0000">'use strict'</font><font color="#990000">;</font>
+
+<b><font color="#0000FF">var</font></b> expandSelection <font color="#990000">=</font> <b><font color="#000000">require</font></b><font color="#990000">(</font><font color="#FF0000">'expand-selection'</font><font color="#990000">);</font>
+
+
+module<font color="#990000">.</font>exports <font color="#990000">=</font> <b><font color="#0000FF">function</font></b> <font color="#990000">(</font>opts<font color="#990000">)</font> <font color="#FF0000">{</font>
+  document<font color="#990000">.</font><b><font color="#000000">addEventListener</font></b><font color="#990000">(</font><font color="#FF0000">'mouseup'</font><font color="#990000">,</font> <b><font color="#0000FF">function</font></b> <font color="#990000">()</font> <font color="#FF0000">{</font>
+    <b><font color="#000000">expandSelection</font></b><font color="#990000">(</font>opts<font color="#990000">);</font>
+  <font color="#FF0000">}</font><font color="#990000">);</font>
+<font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
