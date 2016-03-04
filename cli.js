@@ -16,7 +16,7 @@ function usage() {
     'Reads <file> or stdin, writes to stdout.',
     '',
     'Options:',
-    '  --ignore-case, -i  Ignore case while attempting a match.'
+    '  --ignore-case, -i  Ignore case when performing a match.'
   ].join('\n');
 }
 

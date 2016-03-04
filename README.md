@@ -34,13 +34,13 @@ $ marked README.md | hise
 
 ### `hise [option]... [<file>]`
 
-Appends the script to the HTML page.
+Appends the script to an HTML page. If input is not HTML but plaintext, wraps it in `<pre>` first.
 
 Reads `<file>` or stdin, writes to stdout.
 
 #### Option: `--ignore-case, -i`
 
-Ignore case while attempting a match in a string.
+Ignore case when matching a string.
 
 ## Install
 
