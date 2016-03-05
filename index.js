@@ -26,7 +26,7 @@ module.exports = function (opts) {
     if (err) throw err;
 
     input
-      .pipe(scriptInjector(buf.toString()))
+      .pipe(scriptInjector(Function(buf.toString())))
       .pipe(output);
   });
 
