@@ -37,6 +37,6 @@ var opts = minimist(process.argv.slice(2), {
   }
 
   (argv.length == 1 ? fs.createReadStream(argv[0]) : process.stdin)
-    .pipe(hise(opts))
+    .pipe(hise({ ignoreCase: opts['ignore-case'] }))
     .pipe(process.stdout);
 }(opts, opts._));

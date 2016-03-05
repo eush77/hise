@@ -16,35 +16,64 @@ var bundle = function (opts, cb) {
 };
 
 
+// Transform stream that wraps its input in <pre> tags unless it's HTML already.
+var HtmlWrapStream = function () {
+  var wrapInPre;
+
+  return through(function (chunk, enc, cb) {
+    if (wrapInPre == null) {
+      chunk = chunk.toString();
+      var initialChar = /\S/.exec(chunk);
+
+      if (initialChar == null) {
+        // The chunk is all whitespace.
+        return cb(null, chunk);
+      }
+
+      // Push leading whitespace.
+      this.push(chunk.slice(0, initialChar.index));
+      chunk = chunk.slice(initialChar.index);
+
+      // Check the first non-whitespace character: if it is "<",
+      // treat input as HTML. Otherwise enable wrapping.
+      if (initialChar[0] == '<') {
+        wrapInPre = false;
+      }
+      else {
+        wrapInPre = true;
+        this.push('<pre>');
+      }
+    }
+
+    if (wrapInPre) {
+      chunk = encodeEntities(chunk.toString());
+    }
+
+    cb(null, chunk);
+  }, function (cb) {
+    if (wrapInPre) {
+      // Disable encoding of the next thing we push.
+      wrapInPre = false;
+
+      this.end('</pre>');
+    }
+    cb();
+  });
+};
+
+
 module.exports = function (opts) {
-  var input = through();
+  var input = HtmlWrapStream();
   var output = through();
 
   opts = opts || {};
 
-  bundle({ ignoreCase: opts['ignore-case'] }, function (err, buf) {
+  bundle({ ignoreCase: opts.ignoreCase }, function (err, buf) {
     if (err) throw err;
 
     input
       .pipe(scriptInjector(Function(buf.toString())))
       .pipe(output);
-  });
-
-  return duplexer(input, output);
-
-  // TODO: This is broken in the sense that it doesn't work for HTML anymore.
-  // What a shame.
-  output.write('<pre>');
-
-  input
-    .pipe(through(function (chunk, enc, done) {
-      this.push(encodeEntities(chunk.toString()));
-      done();
-    }))
-    .pipe(output, { end: false });
-
-  input.on('end', function () {
-    output.write('</pre><script>');
   });
 
   return duplexer(input, output);
