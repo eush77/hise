@@ -40,6 +40,7 @@
     "help-version": "^0.2.0",
     "html-entities": "^1.2.0",
     "minimist": "^1.1.1",
+    "script-injector": "github:eush77/script-injector#nobody",
     "stread": "^1.0.0",
     "through2": "^2.0.1"
   },
@@ -47,6 +48,7 @@
     "glob": "^7.0.0",
     "hyperstream": "^1.2.2",
     "tape": "^4.5.0",
-    "tape-drain": "^0.1.0"
+    "tape-drain": "^0.1.0",
+    "trumpet": "^1.7.2"
   }
 }
