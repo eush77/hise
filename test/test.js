@@ -47,3 +47,36 @@ test(function (t) {
     });
   });
 });
+
+
+test('opts.ignoreCase', function (t) {
+  [{
+    stream: hise(),
+    needle: '"ignoreCase":false',
+    label: 'false (default)'
+  }, {
+    stream: hise({ ignoreCase: false }),
+    needle: '"ignoreCase":false',
+    label: 'false'
+  }, {
+    stream: hise({ ignoreCase: true }),
+    needle: '"ignoreCase":true',
+    label: 'true'
+  }].forEach(function (testCase) {
+    t.test('opts.ignoreCase = ' + testCase.label, function (t) {
+      t.plan(1);
+
+      testCase.stream.pipe(trumpet()).createReadStream('script')
+        .pipe(through(function (chunk, enc, done) {
+          if (chunk.toString().indexOf(testCase.needle) >= 0) {
+            t.pass();
+          }
+          done();
+        }));
+
+      testCase.stream.end();
+    });
+  });
+
+  t.end();
+});

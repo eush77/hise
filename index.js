@@ -68,7 +68,7 @@ module.exports = function (opts) {
 
   opts = opts || {};
 
-  bundle({ ignoreCase: opts.ignoreCase }, function (err, buf) {
+  bundle({ ignoreCase: opts.ignoreCase || false }, function (err, buf) {
     if (err) throw err;
 
     input
