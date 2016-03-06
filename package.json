@@ -1,6 +1,6 @@
 {
   "name": "hise",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Inject <script> to expand DOM selection on mouse-up",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
