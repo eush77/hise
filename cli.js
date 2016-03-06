@@ -10,17 +10,19 @@ var fs = require('fs');
 
 
 var app = App([
-  'Usage:  hise [<file>]',
+  'Usage:  hise [option]... [<file>]',
   '',
   'Reads <file> or stdin, writes to stdout.',
   '',
   'Options:',
+  '  --raw, -r          Wrap input in a <pre> tag.',
   '  --ignore-case, -i  Ignore case when performing a match.'
 ].join('\n'));
 
 var opts = minimist(process.argv.slice(2), {
-  boolean: 'ignore-case',
+  boolean: ['raw', 'ignore-case'],
   alias: {
+    raw: 'r',
     'ignore-case': 'i'
   },
   unknown: function (arg) {
@@ -37,6 +39,6 @@ var opts = minimist(process.argv.slice(2), {
   }
 
   (argv.length == 1 ? fs.createReadStream(argv[0]) : process.stdin)
-    .pipe(hise({ ignoreCase: opts['ignore-case'] }))
+    .pipe(hise({ raw: opts.raw, ignoreCase: opts['ignore-case'] }))
     .pipe(process.stdout);
 }(opts, opts._));

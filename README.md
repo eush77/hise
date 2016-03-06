@@ -19,7 +19,7 @@
 
 ```
 # wrap arbitrary output
-$ ps --sort-pcpu | head | hise
+$ ps --sort-pcpu | head | hise -r
 
 # with source-highlight
 $ source-highlight -i index.js | hise
@@ -39,6 +39,10 @@ $ marked README.md | hise
 Appends the script to an HTML page. If input is not HTML but plaintext, wraps it in `<pre>` first.
 
 Reads `<file>` or stdin, writes to stdout.
+
+#### Option: `--raw, -r`
+
+Wrap input stream in a `<pre>` tag.
 
 #### Option: `--ignore-case, -i`
 

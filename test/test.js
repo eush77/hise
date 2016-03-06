@@ -4,49 +4,56 @@ var hise = require('..');
 
 var tape = require('tape'),
     test = require('tape-drain')(tape),
-    glob = require('glob'),
     hyperstream = require('hyperstream'),
     trumpet = require('trumpet'),
     through = require('through2');
 
-var basename = require('path').basename,
+var path = require('path'),
     fs = require('fs');
 
 
-test(function (t) {
-  var mainScript = fs.readFileSync(__dirname + '/../lib/script.js', 'utf8');
+// Read test fixture.
+var read = function (filePath) {
+  return fs.createReadStream(path.join(__dirname, 'fixtures', filePath));
+};
 
-  glob(__dirname + '/fixtures/*([^.]).html', function (err, files) {
-    if (err) throw err;
+// Used to roughly check <script> contents.
+var mainScript = fs.readFileSync(__dirname + '/../lib/script.js', 'utf8');
 
-    t.plan(2 * files.length);
+var checkOutput = function (output, expected) {
+  return function (t) {
+    t.plan(2);
 
-    files.forEach(function (inputPath) {
-      if (basename(inputPath).split('.').slice(1) != 'html') {
-        throw Error('Invalid test fixture: ' + JSON.stringify(inputPath));
-      }
+    // Check HTML output.
+    t.drain.equal(output.pipe(hyperstream({ script: '' })), expected,
+                  'HTML checked');
 
-      var outputPath = inputPath.replace(/\.html$/, '.out.html');
-      var name = basename(inputPath).split('.', 1)[0];
+    // Check <script> contents.
+    output.pipe(trumpet()).createReadStream('script')
+      .pipe(through(function (chunk, enc, done) {
+        if (chunk.toString().indexOf(mainScript) >= 0) {
+          t.pass('script found');
+        }
+        done();
+      }));
+  };
+};
 
-      var output = fs.createReadStream(inputPath).pipe(hise());
 
-      // Check HTML output.
-      t.drain.equal(output.pipe(hyperstream({ script: '' })),
-                    fs.createReadStream(outputPath),
-                    name);
-
-      // Check <script> contents.
-      output.pipe(trumpet()).createReadStream('script')
-        .pipe(through(function (chunk, enc, done) {
-          if (chunk.toString().indexOf(mainScript) >= 0) {
-            t.pass('script found');
-          }
-          done();
-        }));
-    });
-  });
+test('HTML input', function (t) {
+  t.test('full HTML markup',
+         checkOutput(read('html.html').pipe(hise()),
+                     read('html.out.html')));
+  t.test('partial HTML markup',
+         checkOutput(read('htmlish.html').pipe(hise()),
+                     read('htmlish.out.html')));
+  t.end();
 });
+
+
+test('raw input',
+     checkOutput(read('raw.html').pipe(hise({ raw: true })),
+                 read('raw.out.html')));
 
 
 test('opts.ignoreCase', function (t) {

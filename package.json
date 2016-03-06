@@ -45,7 +45,6 @@
     "through2": "^2.0.1"
   },
   "devDependencies": {
-    "glob": "^7.0.0",
     "hyperstream": "^1.2.2",
     "tape": "^4.5.0",
     "tape-drain": "^0.1.0",

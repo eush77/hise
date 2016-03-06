@@ -16,57 +16,39 @@ var bundle = function (opts, cb) {
 };
 
 
-// Transform stream that wraps its input in <pre> tags unless it's HTML already.
+// Transform stream that wraps its input in a <pre> tag.
 var HtmlWrapStream = function () {
-  var wrapInPre;
+  var firstChunk = true;
+  var wrap = true;
 
-  return through(function (chunk, enc, cb) {
-    if (wrapInPre == null) {
-      chunk = chunk.toString();
-      var initialChar = /\S/.exec(chunk);
-
-      if (initialChar == null) {
-        // The chunk is all whitespace.
-        return cb(null, chunk);
-      }
-
-      // Push leading whitespace.
-      this.push(chunk.slice(0, initialChar.index));
-      chunk = chunk.slice(initialChar.index);
-
-      // Check the first non-whitespace character: if it is "<",
-      // treat input as HTML. Otherwise enable wrapping.
-      if (initialChar[0] == '<') {
-        wrapInPre = false;
-      }
-      else {
-        wrapInPre = true;
-        this.push('<pre>');
-      }
+  return through(function (chunk, enc, done) {
+    if (firstChunk) {
+      firstChunk = false;
+      this.push('<pre>');
     }
 
-    if (wrapInPre) {
+    if (wrap) {
       chunk = encodeEntities(chunk.toString());
     }
 
-    cb(null, chunk);
-  }, function (cb) {
-    if (wrapInPre) {
+    this.push(chunk);
+    done();
+  }, function (done) {
+    if (!firstChunk) {
       // Disable encoding of the next thing we push.
-      wrapInPre = false;
+      wrap = false;
 
       this.end('</pre>');
     }
-    cb();
+    done();
   });
 };
 
 
 module.exports = function (opts) {
-  var input = HtmlWrapStream();
-  var output = through();
-
   opts = opts || {};
+  var input = opts.raw ? HtmlWrapStream() : through();
+  var output = through();
 
   bundle({ ignoreCase: opts.ignoreCase || false }, function (err, buf) {
     if (err) throw err;
