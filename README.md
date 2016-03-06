@@ -19,7 +19,7 @@ Inject `<script>` to [expand DOM selection][expand-selection] on mouse-up.
 
 ```
 # wrap arbitrary output
-$ ps --sort-pcpu | head | hise -r
+$ ps --sort=pcpu | head | hise -r
 
 # with source-highlight
 $ source-highlight -i index.js | hise
