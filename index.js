@@ -2,17 +2,17 @@
 
 var browserify = require('browserify'),
     scriptInjector = require('script-injector'),
-    stread = require('stread'),
     through = require('through2'),
     duplexer = require('duplexer2'),
     encodeEntities = require('html-entities').XmlEntities.encode;
 
 
 var bundle = function (opts, cb) {
-  var init = 'require("./lib/script")(' +
-        JSON.stringify(opts) + ')';
-  browserify(stread(init), { basedir: __dirname })
+  var init = through();
+  browserify(init, { basedir: __dirname })
     .bundle(cb);
+
+  init.end('require("./lib/script")(' + JSON.stringify(opts) + ')');
 };
 
 

@@ -48,7 +48,6 @@
     "html-entities": "^1.2.0",
     "minimist": "^1.1.1",
     "script-injector": "github:eush77/script-injector#nobody",
-    "stread": "^1.0.0",
     "through2": "^2.0.1"
   },
   "devDependencies": {
