@@ -1,7 +1,7 @@
 {
   "name": "hise",
   "version": "0.2.0",
-  "description": "Expand DOM selection on mouse-up, as a CLI tool",
+  "description": "Inject <script> to expand DOM selection on mouse-up",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
   "bin": {
@@ -24,14 +24,21 @@
     "url": "https://github.com/eush77/hise/issues"
   },
   "keywords": [
-    "html",
-    "transform",
+    "cli",
     "dom",
-    "selection",
-    "search",
-    "highlight",
     "expand",
-    "text"
+    "highlight",
+    "html",
+    "inject",
+    "mouse",
+    "pre",
+    "script",
+    "search",
+    "select",
+    "selection",
+    "text",
+    "transform",
+    "wrap"
   ],
   "dependencies": {
     "browserify": "^10.2.1",

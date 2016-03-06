@@ -4,7 +4,7 @@
 
 [![Build Status][travis-badge]][travis] [![Dependency Status][david-badge]][david]
 
-[Expand DOM selection][expand-selection] on mouse-up, as a CLI tool.
+Inject `<script>` to [expand DOM selection][expand-selection] on mouse-up.
 
 [expand-selection]: https://github.com/eush77/expand-selection
 
